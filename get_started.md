@@ -24,6 +24,22 @@ Consider an Association File containing a list of diseases and their associated 
 
 Now, assume that certain diseases are connected and can be categorized under a more comprehensive classification, such as "Cancer" or "Neurological Disorders." In this case, "Cancer" or "Neurological Disorders" would serve as the supergroups and be defined in the Names File alongside their corresponding group names. For example, the groups "Breast Cancer" and "Lung Cancer" would both be associated with the supergroup "Cancer" in the Names File. The second column of the Names File identifies the alias or supergroup name corresponding to each group in the first column.
 
+**Sample of the association file:**
+```tsv
+Group       Gene
+Breast Cancer   BRCA1
+Breast Cancer   BRCA2
+Lung Cancer   TP53
+Lung Cancer   EGFR
+```
+
+**Sample of the names file**
+```tsv
+Group       SuperGroup
+Breast Cancer   Cancer
+Lung Cancer   Cancer
+```
+
 #### 2.1.2 Output file formats
 
 ```
