@@ -10,37 +10,78 @@ pip install DBRetina
 
 ## 2. Commands
 
-### 2.1 Sketching
+### 2.1 Indexing
 
-#### 2.1.1 Input file formats
+#### 2.1.1 Input Files
 
-The sketch command of DBRetina requires two files, namely the association file and the names file. The Association File is a two-column TSV (tab-separated values) file with an included header. The first column denotes groups, while the second column indicates the genes associated with each respective group. Each row signifies a single gene and its corresponding group.
+The DBRetina's Index command is designed to generate an index of a gene association network. To utilize this command, you must provide an Association File and, optionally, a Names File.
 
-The Names File is another two-column TSV file, also including a header. The first column represents the group names from the Association File, and the second column specifies the corresponding supergroup or alias name. The Names File serves to allow the grouping of related groups under a broader category or supergroup.
+**Association File**
 
-To illustrate this within the context of diseases:
+The Association File is a two-column TSV (tab-separated values) file with an included header. The first column denotes groups, while the second column indicates the genes associated with each respective group. Each row signifies a single gene and its corresponding group.
 
-Consider an Association File containing a list of diseases and their associated genes. In this scenario, the diseases represent the groups, and each gene is assigned to a specific disease group. For instance, "Breast Cancer" could be a disease group, with genes related to breast cancer listed in the second column of the Association File.
+**Example of an Association File:**
 
-Now, assume that certain diseases are connected and can be categorized under a more comprehensive classification, such as "Cancer" or "Neurological Disorders." In this case, "Cancer" or "Neurological Disorders" would serve as the supergroups and be defined in the Names File alongside their corresponding group names. For example, the groups "Breast Cancer" and "Lung Cancer" would both be associated with the supergroup "Cancer" in the Names File. The second column of the Names File identifies the alias or supergroup name corresponding to each group in the first column.
-
-**Sample of the association file:**
 ```tsv
-Group       Gene
-Breast Cancer   BRCA1
-Breast Cancer   BRCA2
-Lung Cancer   TP53
+Disease       Gene
+Breast Cancer BRCA1
+Breast Cancer BRCA2
 Lung Cancer   EGFR
+Lung Cancer   KRAS
 ```
 
-**Sample of the names file**
+**Names File (Optional)**
+
+The Names File is another two-column TSV file, also including a header. The first column represents the group names from the Association File, and the second column specifies the corresponding supergroup or alias name. The Names File serves to allow the grouping of related groups under a broader category or supergroup. This file is optional; if not provided, the groups from the Association File will be treated as supergroups.
+
+**Example of a Names File:**
+
 ```tsv
-Group       SuperGroup
-Breast Cancer   Cancer
+Group         Supergroup
+Breast Cancer Cancer
 Lung Cancer   Cancer
 ```
 
-#### 2.1.2 Output file formats
+**Inverted Flag (Optional)**
+
+An additional option flag, "inverted," is available to invert the index. When the "inverted" flag is used, querying a supergroup will return all associated genes, whereas, in the default index, querying a gene will return the associated supergroups.
+
+**Illustration within the context of diseases:**
+
+Consider an Association File containing a list of diseases and their associated genes. In this scenario, the diseases represent the groups, and each gene is assigned to a specific disease group. For instance, "Breast Cancer" could be a disease group, with genes related to breast cancer (e.g., BRCA1 and BRCA2) listed in the second column of the Association File.
+
+If the Names File is not provided, the groups from the Association File will be treated as supergroups. For example, "Breast Cancer" would be considered a supergroup, and the associated genes (e.g., BRCA1 and BRCA2) would be listed directly under this supergroup.
+
+When using the "inverted" flag, a user can query a supergroup, such as "Breast Cancer," and receive a list of all genes associated with that supergroup. In this example, the query result would include genes like BRCA1 and BRCA2. In contrast, the normal index allows a user to query a gene, such as BRCA1, and retrieve the supergroups associated with that gene (e.g., "Breast Cancer").
+
+**Usage**
+
+By providing the Association File, and if necessary, the Names File to the Index command, along with the optional "inverted" flag, you can generate an index of the gene association network that accommodates both disease groups and their corresponding supergroups, allowing for flexible querying of the network.
+
+```bash
+# Example command with Names File and "inverted" flag:
+DBRetina index -a association.tsv -n names.tsv --inverted
+
+# Example command without Names File:
+DBRetina index -a association.tsv
+```
+
+#### 2.1.2 Output file
+
+The output generated by the Index command consists of two JSON files (private and public) and a set of index files. These files are explained in detail below:
+
+1. JSON Files: Private and Public
+   - Private JSON file: This file contains supergroups and their related genes in text format. It is intended for internal use and reference, as it contains the actual gene names.
+   - Public JSON file: This file also contains supergroups and their related genes, but the gene names are hashed. This hashed representation of genes is used in the index to protect the sensitive information. The public version is utilized during indexing, and the text representation of genes is not stored in the index.
+
+When the "inverted" flag is used, the roles of the private and public JSON files are reversed. The private file will contain genes and their related supergroups in text format, while the public file will have the gene names hashed.
+
+2. Index Files
+   The primary information required for index files is the index prefix, which is a common prefix present in all files generated during this step. The naming convention for the index files depends on whether the "inverted" flag is used:
+   - Without "inverted" flag: If the indexing is performed without the "inverted" flag, the string "gene_to_groups" will be appended to the user-defined output prefix. For example, if the user specifies the output prefix as "test_idx", the final prefix for the index files will be "test_idx_gene_to_groups".
+   - With "inverted" flag: If the "inverted" flag is used during indexing, the string "group_to_genes" will be appended to the user-defined output prefix. In this case, the final prefix for the index files will be "test_idx_group_to_genes".
+
+The generated index files consist of binary and text files that hold the index information. The binary files cannot be directly accessed or read, as they store the information in a non-human-readable format.
 
 ```
 Usage: DBRetina [OPTIONS] COMMAND [ARGS]...
@@ -51,9 +92,9 @@ Options:
   --help       Show this message and exit.
 
 Commands:
-  sketch    Sketch a DBRetina files.
   index     Index hashes JSON file.
-  pairwise  Generate containment pairwise matrix.
+  pairwise  Generate pairwise TSV.
+  query     Query DBRetina index.
   cluster   Clustering.
   export    Export DBRetina pairwise to multiple formats.
 ```
