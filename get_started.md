@@ -1,5 +1,41 @@
 # Get started with the DBRetina package
 
+<style>
+.note-box {
+  border: 1px solid #888;
+  border-radius: 4px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  margin-bottom: 15px;
+}
+.note {
+font-size: 14px;
+color: #333;
+font-weight: bold;
+margin-bottom: 5px;
+}
+
+.warning {
+font-size: 14px;
+color: #a00;
+font-weight: bold;
+margin-bottom: 5px;
+}
+</style>
+
+  
+---
+**NOTE**
+
+<div class="note-box">
+        <p class="note">All text is converted to lowercase.</p>
+        <p class="note">All double quotes are removed.</p>
+        <p class="warning">Warning: Pipe character '|' can't be used in the input data.</p>
+    </div>
+
+
+---
+
 ## 1. Installation
 
 The DBRetina package is currently available on Pypi. You can install it using the following command:
@@ -10,7 +46,7 @@ pip install DBRetina
 
 ## 2. Commands
 
-```bash
+```text
 Usage: DBRetina [OPTIONS] COMMAND [ARGS]...
 
 Options:
@@ -138,10 +174,10 @@ The Query command in DBRetina is designed to retrieve information from the gener
 The output of the Query command consists of two TSV files, depending on the type of index created:
 
 - With "_gene_to_groups" appended prefix: The command will expect a list of genes to query.
-  - The first TSV file will have the gene name in the first column and all associated supergroups in the second column, separated by the pipe character (|).
+  - The first TSV file will have the gene name in the first column and all associated supergroups in the second column, separated by the pipe character '|'.
   - The second TSV file will have the supergroup name in the first column and the number of genes associated with that supergroup in the second column.
 
 - With "_group_to_genes" appended prefix: The command will expect a list of supergroups to query.
-  - The first TSV file will have the supergroup name in the first column and all associated genes in the second column, separated by the pipe character (|).
+  - The first TSV file will have the supergroup name in the first column and all associated genes in the second column, separated by the pipe character '|'.
   - The second TSV file will have the gene name in the first column and the number of supergroups associated with that gene in the second column.
 
