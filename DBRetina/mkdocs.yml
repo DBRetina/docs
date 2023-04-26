@@ -1,0 +1,38 @@
+site_name: DBRetina Documentation
+theme:
+  name: material
+  palette:
+    scheme: slate
+    primary: indigo
+  features:
+    - content.code.copy
+site_url: https://dbretina.github.io/docs/
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Installation: installation.md
+    - Quick Example: quick_example.md
+    - Usage:
+      - Index: usage/dbretina_index.md
+      - Pairwise: usage/dbretina_pairwise.md
+      - Query: usage/dbretina_query.md
+  - Examples:
+    - Example 1: example1.md
+    - Example 2: example2.md
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
