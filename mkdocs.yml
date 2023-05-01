@@ -5,9 +5,9 @@ site_name: DBRetina Documentation
 
 theme:
   name: material
-  # palette:
-  #   scheme: slate
-  #   primary: indigo
+  palette:
+    scheme: slate
+    primary: indigo
   features:
     - content.code.copy
 
