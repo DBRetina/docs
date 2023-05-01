@@ -1,11 +1,16 @@
 site_name: DBRetina Documentation
+
 theme:
-  name: material
-  palette:
-    scheme: slate
-    primary: indigo
-  features:
-    - content.code.copy
+  name: simple-blog
+
+# theme:
+#   name: material
+#   palette:
+#     scheme: slate
+#     primary: indigo
+#   features:
+#     - content.code.copy
+
 site_url: https://dbretina.github.io/docs/
 nav:
   - Home: index.md
