@@ -11,14 +11,17 @@ nav:
   - Home: index.md
   - Getting Started:
     - Installation: installation.md
-    - Quick Example: quick_example.md
+    # - Quick Example: quick_example.md
     - Usage:
       - Index: usage/dbretina_index.md
       - Pairwise: usage/dbretina_pairwise.md
+      - Filter: usage/dbretina_filter.md
+      - Cluster: usage/dbretina_cluster.md
+      - Export: usage/dbretina_export.md
       - Query: usage/dbretina_query.md
-  - Examples:
-    - Example 1: example1.md
-    - Example 2: example2.md
+  # - Examples:
+  #   - Example 1: example1.md
+  #   - Example 2: example2.md
 
 markdown_extensions:
   - pymdownx.highlight:
@@ -36,3 +39,8 @@ markdown_extensions:
   - pymdownx.keys
   - pymdownx.mark
   - pymdownx.tilde
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          # format: !!python/name:pymdownx.superfences.fence_code_format
