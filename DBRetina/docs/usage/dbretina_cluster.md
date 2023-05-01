@@ -1,4 +1,4 @@
-# 3. Cluster
+# 4. Cluster
 
 Graph-based clustering of the pairwise TSV file.
 
@@ -8,32 +8,38 @@ Usage: DBRetina cluster [OPTIONS]
   Graph-based clustering of the pairwise TSV file.
 
 Options:
-  -c, --cutoff FLOAT RANGE  cluster the supergroups with (distance > cutoff)
-                            [default: 0.0; 0<=x<=1]
-  -i, --index-prefix TEXT   Index file prefix  [required]
+  -p, --pairwise PATH       filtered pairwise TSV file
   -d, --dist-type TEXT      select from ['min_cont', 'avg_cont', 'max_cont',
-                            'ochiai', 'jaccard']  [default: max_cont]
+                            'ochiai', 'jaccard']  [required]
+  -c, --cutoff FLOAT RANGE  cluster the supergroups with (distance > cutoff)
+                            [default: 0.0; 0<=x<=100]
+  -o, --output-prefix TEXT  output file prefix  [required]
   --help                    Show this message and exit.
 ```
 
-## 3.1 Command arguments
 
-<span style="color:orange;">** -c, --cutoff FLOAT RANGE  cluster the supergroups with (distance > cutoff)  [default: 0.0; 0<=x<=1] **<span/>
+## 4.1 Command arguments
 
-The cutoff value for clustering the supergroups. The default value is 0.0, which means that all supergroups will be clustered together. The cutoff value can be between 0 and 1. The higher the cutoff value, the more stringent the clustering will be.
+<span style="color:orange;">** -c, --cutoff FLOAT RANGE  cluster the supergroups with (distance > cutoff) [default: 0.0; 0<=x<=100] **</span>
 
-<span style="color:orange;">** -i, --index-prefix TEXT   Index file prefix  [required] **<span/>
+The cutoff value for clustering the supergroups. The default value is 0.0, which means that all supergroups will be clustered together. The cutoff value can be between 0% and 100%.
 
-This is the user-defined prefix that was used in the indexing step.
+<span style="color:orange;">** -p, --pairwise PATH       filtered pairwise TSV file  [required] **</span>
 
-<span style="color:orange;">** -d, --dist-type TEXT      select from ['min_containment', 'avg_containment', 'max_containment', 'ochiai', 'jaccard']  [default: max_cont] **<span/>
+The original or a filtered pairwise TSV file.
 
-The distance metric to be used for clustering. The default value is 'max_containment', which means that the maximum containment between two supergroups will be used as the distance between them. The other options are 'min_containment', 'avg_containment', 'ochiai', and 'jaccard'.
+<span style="color:orange;">** -d, --dist-type TEXT      select from ['min_cont', 'avg_cont', 'max_cont', 'ochiai', 'jaccard']  [required] **</span>
+
+The distance metric to apply the cutoff on.
 
 ---
 
-## 3.2 Output files format
+## 4.2 Output files format
 
-<span style="color:orange;">** {prefix}_DBRetina_clusters_{cutoff}%.txt **<span/>
+<span style="color:orange;">** {output_prefix}_clusters_histogram.png **</span>
 
-Each line in the file represents a cluster of supergroups separated by a pipe character.
+A histogram provides a visual representation of the distribution of cluster sizes. Each bar corresponds to a size range, with the height of the bar indicating the number of clusters falling within that range. This allows for a quick understanding of how cluster sizes are distributed, identifying common sizes and outliers.
+
+<span style="color:orange;">** {output_prefix}_clusters_bubbles.png **</span>
+
+Bubble plot uses a grid layout to represent distinct clusters. The bubble size and color gradient both denote the magnitude of each cluster. The bubble plot is useful for visualizing the distribution of cluster sizes and the relative sizes of each cluster.
