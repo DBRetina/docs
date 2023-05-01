@@ -47,11 +47,6 @@ Options:
 
 ## 3.1 Command arguments
 
-<span style="color:orange;">** -p, --pairwise PATH       the pairwise TSV file  [required] **</span>
-
-The original or a filtered pairwise TSV file.
-
-
 ### 3.1.1 Filtering by distance's cutoff
 
 <span style="color:orange;">** -c, --cutoff FLOAT RANGE  filter out distances < cutoff  [default: 0.0; 0<=x<=100] **</span>

@@ -1,5 +1,7 @@
 # 5. Query
 
+Query a DBRetina index with a set of groups (provided as a single-column file or cluster IDs in a DBRetina cluster file).
+
 ```
 Usage: DBRetina query [OPTIONS]
 

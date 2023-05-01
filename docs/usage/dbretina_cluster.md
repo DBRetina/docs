@@ -1,6 +1,6 @@
 # 4. Cluster
 
-Graph-based clustering of the pairwise TSV file.
+Graph-based clustering of the pairwise TSV file based on the connected components algorithm. The clustering is based on the distance metric and the cutoff value. The output is a DBRetina clusters file.
 
 ```
 Usage: DBRetina cluster [OPTIONS]
@@ -35,6 +35,11 @@ The distance metric to apply the cutoff on.
 ---
 
 ## 4.2 Output files format
+
+<span style="color:orange;">** {output_prefix}_clusters.tsv **</span>
+
+The DBRetina clusters TSV file. First column is the cluster ID, second column is the cluster size, and the third column is PIPE separated cluster members.
+
 
 <span style="color:orange;">** {output_prefix}_clusters_histogram.png **</span>
 
