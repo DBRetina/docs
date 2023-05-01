@@ -22,8 +22,9 @@ nav:
       - Pairwise: usage/dbretina_pairwise.md
       - Filter: usage/dbretina_filter.md
       - Cluster: usage/dbretina_cluster.md
-      - Export: usage/dbretina_export.md
       - Query: usage/dbretina_query.md
+      - Export: usage/dbretina_export.md
+
   # - Examples:
   #   - Example 1: example1.md
   #   - Example 2: example2.md
