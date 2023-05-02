@@ -25,9 +25,12 @@ nav:
       - Query: usage/dbretina_query.md
       - Export: usage/dbretina_export.md
 
-  # - Examples:
-  #   - Example 1: example1.md
+  - Examples:
+    - Example 1: DisGeNET_similarity_network-complete.ipynb
   #   - Example 2: example2.md
+
+plugins:
+  - mkdocs-jupyter
 
 markdown_extensions:
   - pymdownx.highlight:
